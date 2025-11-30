@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="l10n_ar_pos_eticket.ReceiptHeader" t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension">
+        <xpath expr="//div[@class='cashier']" position="after">
+			<t t-if="props.data.street">
+				<h2>
+					<t t-esc="props.data.street"/>
+				</h2>
+			</t>
+			<t t-if="props.data.invoice_id">
+				<div class="afip-invoice-info" >
+					<hr />
+					<strong>
+                    FACTURA 
+						<t t-esc="props.data.invoice_letter"/> - ORIGINAL
+                        
+                            - COD 
+						<t t-esc="props.data.l10n_latam_document_type_id"/>
+						<br />
+                    N° DE FACTURA: 
+						<t t-esc="props.data.invoice_number"/>
+						<br />
+                    FECHA: 
+						<t t-esc="props.data.invoice_date_due"/>
+					</strong>
+					<br />
+					<hr />
+				</div>
+			</t>
+			<t t-if='props.data.partner'>
+				<div>Cliente: 
+					<t t-esc='props.data.partner.name' />
+				</div>
+			</t>
+			<div class="afip-info">
+				<t t-if="props.data.invoice_id">
+					<div>CUIT: 
+						<t t-esc="props.data.company.vat"/>
+					</div>
+					<t t-if="props.data.l10n_ar_gross_income_number">
+						<div>Ing. Brutos: 
+							<t t-esc="props.data.l10n_ar_gross_income_number"/>
+						</div>
+					</t>
+					<t t-if="props.data.l10n_ar_afip_start_date">
+						<div>Inicio de actividades: 
+							<t t-esc="props.data.l10n_ar_afip_start_date"/>
+						</div>
+					</t>
+					<div>
+						<t t-esc="props.data.l10n_ar_afip_responsibility_type_id"/>
+					</div>
+					<div>Dirección: 
+						<t t-esc="props.data.street"/> - 
+						<t t-esc="props.data.city"/>
+					</div>
+				</t>
+			</div>
+			<hr />
+		</xpath>
+	</t>
+	<t t-name="l10n_ar_pos_eticket.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+
+            <xpath expr="//ReceiptHeader" position="after">
+            <div class="afip-extra-block">
+                <t t-if="props.data.invoice_id">
+                    <div class="afip-invoice-info">
+                        <hr />
+                        <strong>
+                            FACTURA 
+                            <t t-esc="props.data.invoice_letter"/> - ORIGINAL
+                            - COD <t t-esc="props.data.l10n_latam_document_type_id"/>
+                            <br />
+                            N° DE FACTURA: <t t-esc="props.data.invoice_number"/>
+                            <br />
+                            FECHA: <t t-esc="props.data.invoice_date_due"/>
+                        </strong>
+                        <br />
+                        <hr />
+                    </div>
+                </t>
+
+                <t t-if="props.data.partner">
+                    <div>Cliente: <t t-esc="props.data.partner.name"/></div>
+                </t>
+
+                <div class="afip-info">
+                    <t t-if="props.data.invoice_id">
+                        <div>CUIT: <t t-esc="props.data.headerData.company.vat"/></div>
+                        <t t-if="props.data.l10n_ar_gross_income_number">
+                            <div>Ing. Brutos: <t t-esc="props.data.l10n_ar_gross_income_number"/></div>
+                        </t>
+                        <t t-if="props.data.l10n_ar_afip_start_date">
+                            <div>Inicio de actividades: <t t-esc="props.data.l10n_ar_afip_start_date"/></div>
+                        </t>
+                        <div><t t-esc="props.data.l10n_ar_afip_responsibility_type_id"/></div>
+                        <div>Dirección: <t t-esc="props.data.street"/> - <t t-esc="props.data.city"/></div>
+                    </t>
+                </div>
+
+                <hr />
+            </div>
+        </xpath>
+
+		<xpath expr="//div[hasclass('before-footer')]" position="after">
+			<t t-if="props.data.l10n_ar_afip_qr_code">
+				<img t-att-src="props.data.qr_code_img" class="pos-receipt-qrcode"/>
+			</t>
+			<strong>CAE:</strong>
+			<t t-esc="props.data.l10n_ar_afip_auth_code"/>
+			<div style="margin-top:3px;">
+				<strong>Vto. CAE:</strong>
+				<t t-esc="props.data.l10n_ar_afip_auth_code_due"/>
+			</div>
+		</xpath>
+	</t>
+</templates>
