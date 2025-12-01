@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'POS eticket',
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'author': 'Pronexo',
     'license': 'LGPL-3',
     'sequence': 14,
@@ -13,11 +13,10 @@
     ],
     'assets': {
         'point_of_sale._assets_pos': [
-            'l10n_ar_pos_eticket/static/src/js/pos_model.js',
-            'l10n_ar_pos_eticket/static/src/js/pos_model_ticket.js',
-            # 'l10n_ar_pos_eticket/static/src/js/pos_download_invoice.js',
-            'l10n_ar_pos_eticket/static/src/css/pos_receipts.css',
-            'l10n_ar_pos_eticket/static/src/xml/**/*',
+            'poseticket/static/src/js/pos_model.js',
+            'poseticket/static/src/js/pos_model_ticket.js',
+            'poseticket/static/src/css/pos_receipts.css',
+            'poseticket/static/src/xml/**/*',
         ]
     },
     'installable': True,
