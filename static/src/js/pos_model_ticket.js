@@ -1,6 +1,5 @@
 /** @odoo-module **/
 import { Orderline } from "@point_of_sale/app/generic_components/orderline/orderline";
-import { OrderWidget } from "@point_of_sale/app/generic_components/order_widget/order_widget";
 import { OrderReceipt } from "@point_of_sale/app/screens/receipt_screen/receipt/order_receipt";
 import { ReceiptHeader } from "@point_of_sale/app/screens/receipt_screen/receipt/receipt_header/receipt_header";
 import { PaymentScreen } from "@point_of_sale/app/screens/payment_screen/payment_screen";
@@ -115,12 +114,11 @@ patch(PosOrder.prototype, {
 
 
 
-//Change Template 
+//Change Template
 export class CustomOrderReceipt extends OrderReceipt {
     static template = "l10n_ar_pos_eticket.OrderReceipt";
     static components = {
         Orderline,
-        OrderWidget,
         ReceiptHeader,
     };
     static props = {
@@ -131,9 +129,6 @@ export class CustomOrderReceipt extends OrderReceipt {
     static defaultProps = {
         basic_receipt: false,
     };
-    omit(...args) {
-        return omit(...args);
-    }
 }
 
 patch(ReceiptScreen, {

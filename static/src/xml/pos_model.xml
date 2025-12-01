@@ -1,6 +1,9 @@
-<!-- static/src/xml/invoice_button.xml -->
-<t t-name="l10n_ar_pos_eticket.InvoiceButton" owl="1">
-    <button class="btn btn-light js_invoice" t-on-click="onClick">
-        <i class="fa fa-file-text"/> Facturar
-    </button>
-</t>
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <!-- Invoice Button Template -->
+    <t t-name="l10n_ar_pos_eticket.InvoiceButton">
+        <button class="btn btn-light js_invoice" t-on-click="onClick">
+            <i class="fa fa-file-text"/> Facturar
+        </button>
+    </t>
+</templates>
