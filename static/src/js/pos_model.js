@@ -1,9 +1,9 @@
 /** @odoo-module **/
-import { registry } from "@web/core/registry";
 import { Component } from '@odoo/owl';
 import { patch } from '@web/core/utils/patch';
+import { PaymentScreen } from "@point_of_sale/app/screens/payment_screen/payment_screen";
 
-class CustomInvoiceButton extends Component {
+export class CustomInvoiceButton extends Component {
     static template = "l10n_ar_pos_eticket.InvoiceButton";
 
     onClick() {
@@ -11,23 +11,17 @@ class CustomInvoiceButton extends Component {
     }
 }
 
-registry.category("pos_screens").add("CustomPaymentScreen", (PaymentScreenClass) => {
-    patch(PaymentScreenClass.prototype, {
-        setup() {
-            super.setup();
-            this.showInvoiceButton = !this.env.pos.config.pos_auto_invoice;
+patch(PaymentScreen.prototype, {
+    setup() {
+        super.setup();
+        this.showInvoiceButton = !this.pos.config.pos_auto_invoice;
+    },
 
-            this.components = { ...this.components, CustomInvoiceButton };
-        },
+    toggleIsToInvoice() {
+        this.pos.get_order().set_to_invoice(true);
+    },
 
-        toggleIsToInvoice() {
-            this.env.pos.get_order().set_to_invoice(true);
-        },
-
-        get invoiceButtonComponent() {
-            return this.showInvoiceButton ? CustomInvoiceButton : null;
-        }
-    });
-
-    return PaymentScreenClass;
+    get invoiceButtonComponent() {
+        return this.showInvoiceButton ? CustomInvoiceButton : null;
+    }
 });

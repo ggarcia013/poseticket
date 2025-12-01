@@ -22,7 +22,7 @@ Luego de realizar un primer ticket podrá establecer cliente por defecto
 
 Créditos
 ========
-Odoo 18
+Odoo 19
 
 * Pronexo code@pronexo.com
 * Juan Manuel De Castro <jm@pronexo.com>

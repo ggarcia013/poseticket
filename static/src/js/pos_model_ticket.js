@@ -10,6 +10,9 @@ import { patch } from '@web/core/utils/patch';
 import { useService } from '@web/core/utils/hooks';
 import { useState } from '@odoo/owl';
 import { serializeDateTime } from "@web/core/l10n/dates";
+import { ConnectionLostError, RPCError } from "@web/core/network/rpc";
+import { handleRPCError } from "@point_of_sale/utils";
+import { DateTime } from "luxon";
 
 patch(PaymentScreen.prototype, {
     setup() {
@@ -25,7 +28,7 @@ patch(PaymentScreen.prototype, {
             this.hardwareProxy.openCashbox();
         }
 
-        this.currentOrder.date_order = serializeDateTime(luxon.DateTime.now());
+        this.currentOrder.date_order = serializeDateTime(DateTime.now());
         for (const line of this.paymentLines) {
             if (!line.amount === 0) {
                 this.currentOrder.remove_paymentline(line);
@@ -115,7 +118,7 @@ patch(PosOrder.prototype, {
 
 
 
-//Change Template 
+//Change Template
 export class CustomOrderReceipt extends OrderReceipt {
     static template = "l10n_ar_pos_eticket.OrderReceipt";
     static components = {
@@ -131,9 +134,6 @@ export class CustomOrderReceipt extends OrderReceipt {
     static defaultProps = {
         basic_receipt: false,
     };
-    omit(...args) {
-        return omit(...args);
-    }
 }
 
 patch(ReceiptScreen, {
